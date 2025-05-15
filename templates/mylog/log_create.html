@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<body>
-    <h1>日記作成</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">作成</button>
-    </form>
-</body>
+
+<h1>日記作成</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>タイトル：</p>
+    {{ form.title }}
+    <p>内容：</p>
+    {{ form.content }}
+    <input type="file" name="image" id="imageInput">
+    <img id="imagePreview" src="#" alt="プレビュー" style="max-width:300px; max-height:300px; display:none;">
+    <button type="submit">作成</button>
+</form>
+
+
+
+<script>
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function() {
+                imagePreview.src = reader.result;
+                imagePreview.style.display = "block";
+            });
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = "#";
+            imagePreview.style.display = "none";
+        }
+    });
+</script>
 
 {% endblock %}
