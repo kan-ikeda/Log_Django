@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <body>
     <h1>日記詳細</h1>
     <p>タイトル：</p>
-        {{ log.title }}
-        <p>日付：</p>
-        {{ log.date }}
-        <p>内容：</p>
-        {{ log.content }}
+    {{ log.title }}
+    <p>日付：</p>
+    {{ log.date }}
+    <p>内容：</p>
+    {{ log.content }}
+    {% if log.image %}
+        <img src="{{ log.image.url }}" alt="投稿画像" style="max-width:300px; max-height:300px;">
+    {% else %}
+        <img src="{% static 'img/NoImage.jpg' %}" alt="画像なし" style="max-width:300px; max-height:300px;">
+    {% endif %}
 </body>
 
 {% endblock %}
