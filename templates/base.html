@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+
+<head>
+    <title>
+        {% block title %}日記アプリ{% endblock %}
+    </title>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"> -->
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>
