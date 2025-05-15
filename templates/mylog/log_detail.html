@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
 <body>
@@ -9,7 +10,11 @@
     {{ log.date }}
     <p>内容：</p>
     {{ log.content }}
-    <img src="{{ log.image.url }}" alt="{{ log.title }}">
+    {% if log.image %}
+        <img src="{{ log.image.url }}" alt="投稿画像" style="max-width:300px; max-height:300px;">
+    {% else %}
+        <img src="{% static 'img/NoImage.jpg' %}" alt="画像なし" style="max-width:300px; max-height:300px;">
+    {% endif %}
 </body>
 
 {% endblock %}
