@@ -4,11 +4,12 @@
 <body>
     <h1>日記詳細</h1>
     <p>タイトル：</p>
-        {{ log.title }}
-        <p>日付：</p>
-        {{ log.date }}
-        <p>内容：</p>
-        {{ log.content }}
+    {{ log.title }}
+    <p>日付：</p>
+    {{ log.date }}
+    <p>内容：</p>
+    {{ log.content }}
+    <img src="{{ log.image.url }}" alt="{{ log.title }}">
 </body>
 
 {% endblock %}

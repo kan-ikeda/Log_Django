@@ -3,7 +3,7 @@
 
 <body>
     <h1>日記作成</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">作成</button>
