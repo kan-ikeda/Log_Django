@@ -11,25 +11,9 @@
     {% endblock %}
 </head>
 
-<!-- <body>
-    <header>
-        <div class="header-logo">
-            <img src="{% static 'images/ikon.png'%}" alt="アイコン">
-            <h1>RECIPERU</h1>
-        </div>
-        <div>
-            <ul class="header_list">
-                <li><a href="{% url 'myapp:recipe_list'%}">ホーム</a></li>
-                <li><a href="{% url 'myapp:recipe_create'%}">レシピ投稿</a></li>
-                <li><a href="{% url 'myapp:category_list'%}">カテゴリ一覧</a></li>
-                <li><a href="{% url 'myapp:recipe_search_form'%}">レシピ検索</a></li>
-                <li class="header-contact"><a href="{% url 'myapp:contact_form'%}" class="header-contact-a">お問い合わせ</a></li>
-            </ul>
-        </div>
-    </header>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-</body> -->
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
 
 </html>

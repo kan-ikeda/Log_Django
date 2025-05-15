@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
-{% block content %}
 
-<body>
+{% block title %}
+    日記一覧
+{% endblock %}
+
+{% block content %}
     <h1>日記一覧</h1>
     <ul>
-        {% for log logs %}
-            <li>{{ log.title }}</li>
+        {% for log in logs %}
+            <li><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></li>
         {% endfor %}
     </ul>
-</body>
-
+    <a href="{% url 'mylog:log_create' %}">日記作成</a>
 {% endblock %}
