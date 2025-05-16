@@ -8,6 +8,7 @@
     {{ log.title }}
     <p>日付：</p>
     {{ log.date }}
+    <p>作者: {{ log.author.username }}</p>
     <p>内容：</p>
     {{ log.content }}
     {% if log.image %}
