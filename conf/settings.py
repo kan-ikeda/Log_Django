@@ -130,13 +130,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 未ログインの場合のリダイレクト先
-LOGIN_URL = 'mylog:login'
+LOGIN_URL = 'accounts:login'
 
 # ログイン後のリダイレクト先
 LOGIN_REDIRECT_URL = 'mylog:log_list'
 
 # ログアウト後のリダイレクト先
-LOGOUT_REDIRECT_URL = 'mylog:login'
+LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # メール設定（開発環境ではコンソールに出力）
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
