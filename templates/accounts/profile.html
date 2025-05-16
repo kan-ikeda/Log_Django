@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}プロフィール{% endblock %}
+
+{% block content %}
+<h2>プロフィール</h2>
+<p>ユーザー名: {{ user.username }}</p>
+<p>メールアドレス: {{ user.email }}</p>
+
+<h3>プロフィール編集</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ profile_form.as_p }}
+    <button type="submit">保存</button>
+</form>
+{% endblock %}
