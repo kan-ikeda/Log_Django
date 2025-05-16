@@ -1,9 +1,21 @@
+<!-- mypage.html -->
+
 {% extends 'base.html' %}
+{% load static %}
 
     {% block title %}マイページ{% endblock %}
 
     {% block content %}
         <h1>マイページ</h1>
+        <p>ユーザー：{{ user.username }}</p>
+        <p>メールアドレス：{{ user.email }}</p>
+        <br><br>
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="アバター">
+        {% else %}
+            <img src="{% static 'img/user_ikon.jpg' %}" alt="アバターなし">
+        {% endif %}
+        <br><br>
         <ul>
             {% for log in logs %}
                 <li>

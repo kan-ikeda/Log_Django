@@ -4,6 +4,7 @@ from .models import Log
 from .form import LogForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import Profile
 
 
 
@@ -23,7 +24,12 @@ class MyPageView(LoginRequiredMixin, ListView):
     context_object_name = 'logs'
 
     def get_queryset(self):
-            return Log.objects.filter(author=self.request.user)
+        return Log.objects.filter(author=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profile'] = self.request.user.profile  # profile を追加
+        return context
 
 # 日記作成
 class LogCreateView(LoginRequiredMixin, CreateView):

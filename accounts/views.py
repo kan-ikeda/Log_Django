@@ -29,7 +29,14 @@ def profile(request):
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if profile_form.is_valid():
             profile_form.save()
-            return redirect('accounts:profile')
+            return redirect('mylog:mypage') # マイページにリダイレクト
+        else:
+            print(profile_form.errors)  # バリデーションエラーを表示
     else:
         profile_form = ProfileForm(instance=request.user.profile)
     return render(request, 'accounts/profile.html', {'profile_form': profile_form})
+
+@login_required
+def mypage(request):
+    profile = request.user.profile
+    return render(request, 'accounts/mypage.html', {'profile': profile})
