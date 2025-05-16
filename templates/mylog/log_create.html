@@ -7,11 +7,11 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>タイトル：</p>
-    {{ form.title }}
+    {{ form.title }} <br>
     <p>内容：</p>
-    {{ form.content }}
+    {{ form.content }} <br>
     <input type="file" name="image" id="imageInput">
-    <img id="imagePreview" src="#" alt="プレビュー" style="max-width:300px; max-height:300px; display:none;">
+    <img id="imagePreview" src="#" alt="プレビュー"> <br>
     <button type="submit">作成</button>
 </form>
 
@@ -30,6 +30,7 @@
 
             reader.addEventListener('load', function() {
                 imagePreview.src = reader.result;
+                imagePreview.style.display = 'block';
             });
 
             reader.readAsDataURL(file);
@@ -38,6 +39,8 @@
             imagePreview.src = noImageSrc;
         }
     });
+
+    imagePreview.style.display = 'none';
 </script>
 
 {% endblock %}
