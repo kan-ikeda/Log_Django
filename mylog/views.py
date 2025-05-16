@@ -21,7 +21,7 @@ class LogCreateView(CreateView):
     success_url = reverse_lazy('mylog:log_list')
 
     def form_valid(self, form):
-        # form.instance.image = self.request.FILES.get('image')
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 # 日記詳細
