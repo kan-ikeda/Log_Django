@@ -3,6 +3,8 @@ from django.views.generic import ListView, CreateView, DetailView
 from .models import Log
 from .form import LogForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 # Create your views here.
@@ -13,8 +15,18 @@ class LogListView(ListView):
     template_name = 'mylog/log_list.html'
     context_object_name = 'logs'
 
+
+# マイページ
+class MyPageView(LoginRequiredMixin, ListView):
+    model = Log
+    template_name = 'mylog/mypage.html'
+    context_object_name = 'logs'
+
+    def get_queryset(self):
+            return Log.objects.filter(author=self.request.user)
+
 # 日記作成
-class LogCreateView(CreateView):
+class LogCreateView(LoginRequiredMixin, CreateView):
     model = Log
     form_class = LogForm
     template_name = 'mylog/log_create.html'
@@ -29,4 +41,3 @@ class LogDetailView(DetailView):
     model = Log
     template_name = 'mylog/log_detail.html'
     context_object_name = 'log'
-    
