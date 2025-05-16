@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'mylog',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,3 +128,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 未ログインの場合のリダイレクト先
+LOGIN_URL = 'login'
+
+# ログイン後のリダイレクト先
+LOGIN_REDIRECT_URL = 'home'
+
+# ログアウト後のリダイレクト先
+LOGOUT_REDIRECT_URL = 'login'
+
+# メール設定（開発環境ではコンソールに出力）
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

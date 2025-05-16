@@ -12,4 +12,8 @@
         {% endfor %}
     </ul>
     <a href="{% url 'mylog:log_create' %}">日記作成</a>
+    <br>
+    <a href="{% url 'accounts:login' %}">ログイン</a>
+    <br>
+    <a href="{% url 'accounts:profile' %}">プロフィール</a>
 {% endblock %}

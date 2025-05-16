@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}新規登録{% endblock %}
+
+{% block content %}
+<h2>新規登録</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.help_text %}
+        <small>{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit">登録</button>
+</form>
+<p>すでにアカウントをお持ちですか？ <a href="{% url 'accounts:login' %}">ログイン</a></p>
+{% endblock %}
