@@ -6,14 +6,32 @@
     <title>
         {% block title %}日記アプリ{% endblock %}
     </title>
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     {% block extra_css %}
     {% endblock %}
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+    <header>
+        <div class="header-logo">
+            <img src="{% static 'images/logo.png'%}" alt="アイコン">
+            <h1>Log</h1>
+        </div>
+        <div>
+            <ul class="header_list">
+                <li><a href="{% url 'mylog:log_list'%}">ホーム</a></li>
+                <li><a href="{% url 'mylog:log_create'%}">投稿</a></li>
+                <li>
+                    {% if user.profile.avatar.url %}
+                        <a href="{% url 'mylog:mypage' %}"><img src="{{ user.profile.avatar.url }}" alt="アイコン"></a>
+                    {% else %}
+                        <a href="{% url 'mylog:mypage' %}"><img src="{% static 'images/user_ikon.jpg'%}" alt="デフォルトアイコン"></a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </header>
+    {% block content %}{% endblock %}
 </body>
 
 </html>
