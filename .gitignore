@@ -1,8 +1,10 @@
-__pycache__/
-
 # Python generated files
 *.pyc
 __pycache__/
 
 # OS generated files
 .DS_Store
+
+mylog/__pycache__/
+accounts/__pycache__/
+conf/__pycache__/
