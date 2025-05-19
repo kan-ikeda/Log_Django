@@ -18,7 +18,7 @@ logs_data = [
         'author': testuser,  # ユーザーオブジェクトを直接指定
         'content': '今日から日記を始めます。',
         'tags': ['旅行'],  # タグ名を指定
-        'image':'initial_data/image3.jpg',
+        'image':'logs/data_image3.jpg',
     },
     {
         'title': '旅行の思い出',
@@ -26,7 +26,7 @@ logs_data = [
         'author': testuser,  # ユーザーオブジェクトを直接指定
         'content': 'きれいな景色だね～',
         'tags': ['旅行'],  # タグ名を指定
-        'image':'initial_data/image1.jpg',
+        'image':'logs/data_image1.jpg',
     },
     {
         'title': '今日のランチ',
@@ -34,7 +34,7 @@ logs_data = [
         'author': testuser,  # ユーザーオブジェクトを直接指定
         'content': '美味しいラーメンを食べました。',
         'tags': ['グルメ'],  # タグ名を指定
-        'image':'initial_data/image2.jpg',
+        'image':'logs/data_image2.jpg',
     },
 ]
 
