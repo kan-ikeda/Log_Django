@@ -14,7 +14,11 @@
         <div class="logs">
             {% for log in logs %}
                 <div class="log">
-                    <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}"><img src="{{ log.image.url }}" alt="投稿画像"></a></div>
+                    {% if log.image %}
+                        <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}"><img src="{{ log.image.url }}" alt="投稿画像"></a></div>
+                    {% else %}
+                        <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}"><img src="{% static 'images/NoImage.jpg' %}" alt="投稿画像"></a>
+                    {% endif %}
                     <div class="title_user">
                         <div class="log_title"><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></div>
                         <div class="log_user"><a href="{% url 'mylog:log_detail' log.pk %}">@{{ log.author }}</a></div>
