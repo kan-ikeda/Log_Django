@@ -22,8 +22,12 @@
                 <li><a href="{% url 'mylog:log_list'%}">ホーム</a></li>
                 <li><a href="{% url 'mylog:log_create'%}">投稿</a></li>
                 <li>
-                    {% if user.profile.avatar.url %}
-                        <a href="{% url 'mylog:mypage' %}"><img src="{{ user.profile.avatar.url }}" alt="アイコン"></a>
+                    {% if user.is_authenticated %}
+                        {% if user.profile.avatar %}
+                            <a href="{% url 'mylog:mypage' %}"><img src="{{ user.profile.avatar.url }}" alt="アイコン"></a>
+                        {% else %}
+                            <a href="{% url 'mylog:mypage' %}"><img src="{% static 'images/user_ikon.jpg'%}" alt="デフォルトアイコン"></a>
+                        {% endif %}
                     {% else %}
                         <a href="{% url 'mylog:mypage' %}"><img src="{% static 'images/user_ikon.jpg'%}" alt="デフォルトアイコン"></a>
                     {% endif %}
