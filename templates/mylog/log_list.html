@@ -9,6 +9,7 @@
     <ul>
         {% for log in logs %}
             <li><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></li>
+            <li>{{ log.image }}</li>
         {% endfor %}
     </ul>
     <a href="{% url 'mylog:log_create' %}">日記作成</a>
