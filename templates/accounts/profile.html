@@ -10,7 +10,9 @@
 <h3>プロフィール編集</h3>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ profile_form.as_p }}
+    <p>bio：{{ profile_form.bio }}</p>
+    <p>誕生日：{{ profile_form.birth_date }}</p>
+    <p>アバター:{{ profile_form.avatar }}</p>
     <button type="submit">保存</button>
 </form>
 {% endblock %}
