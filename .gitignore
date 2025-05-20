@@ -7,4 +7,4 @@ __pycache__/
 
 mylog/__pycache__/
 accounts/__pycache__/
-conf/__pycache__/
+conf/__pycache__/*.pyc
