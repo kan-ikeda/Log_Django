@@ -2,23 +2,25 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/log_create.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/log_create.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock %}
 
 {% block content %}
 
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>タイトル：</p>
-    {{ form.title }} <br>
-    <p>内容：</p>
-    {{ form.content }} <br>
-    <input type="file" name="image" id="imageInput">
-    <img id="imagePreview" src="#" alt="プレビュー"> <br>
-    {{ form.tags }}
-    <button type="submit" class="btn">投稿</button>
-</form>
+<div class="body">
+    <form method="post" enctype="multipart/form-data">
+        <div class="log_create">
+            {% csrf_token %}
+            <img id="imagePreview" src="#" alt="プレビュー">
+            <input type="file" name="image" id="imageInput">
+            {{ form.title }}
+            {{ form.content }}
+            <div>{{ form.tags }}</div>
+            <button type="submit" class="btn">投稿</button>
+        </div>
+    </form>
+</div>
 
 
 
@@ -30,13 +32,13 @@
     imagePreview.src = noImageSrc;
     imagePreview.style.display = 'block';
 
-    imageInput.addEventListener('change', function() {
+    imageInput.addEventListener('change', function () {
         const file = this.files[0];
 
         if (file) {
             const reader = new FileReader();
 
-            reader.addEventListener('load', function() {
+            reader.addEventListener('load', function () {
                 imagePreview.src = reader.result;
                 imagePreview.style.display = 'block';
             });
@@ -48,7 +50,7 @@
         }
     });
 
-    
+
 </script>
 
 {% endblock %}

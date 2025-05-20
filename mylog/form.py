@@ -8,12 +8,12 @@ class LogForm(forms.ModelForm):
         fields = ('title', 'content', 'image', 'tags')
         widgets = {
             'title': forms.TextInput(attrs={
-                'class': 'form-title',
+                'class': 'form-title form_input',
                 'placeholder': 'タイトル',
                 'maxlength': 100,
             }),
-            'image': forms.ClearableFileInput(attrs={
-                'class': 'form-image',
+            'image': forms.FileInput(attrs={
+                'class': 'image_input',
             }),
             'date': forms.DateInput(attrs={
                 'class': 'form-date',
@@ -23,7 +23,7 @@ class LogForm(forms.ModelForm):
                 'readonly': 'readonly',
             }),
             'content': forms.Textarea(attrs={
-                'class': 'form-content',
+                'class': 'form-content form_input',
                 'rows': 10,
                 'placeholder': 'キャプションを追加',
             }),
