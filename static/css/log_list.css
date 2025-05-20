@@ -1,0 +1,45 @@
+.body{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.title{
+    font-size: 25px;
+}
+
+.logs{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+}
+
+.log{
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.title_user{
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.log_title a{
+    background-color: #fff;
+}
+
+.log_user{
+    background-color: #fff;
+}
+
+
+
+
+.log_img img{
+    width: 100%;
+    height: auto;
+}
+

@@ -3,30 +3,61 @@
 {% extends 'base.html' %}
 {% load static %}
 
-    {% block title %}マイページ{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/log_list.css' %}">
 
-    {% block content %}
-        <h1>マイページ</h1>
-        <p>ユーザー：{{ user.username }}</p>
-        <p>メールアドレス：{{ user.email }}</p>
-        <br><br>
-        {% if profile.avatar %}
+{% endblock %}
+
+{% block title %}マイページ{% endblock %}
+
+{% block content %}
+<div class="mypage">
+    <div class="profile">
+        <div class="icon bg-w">
+            {% if profile.avatar %}
             <img src="{{ profile.avatar.url }}" alt="アバター">
-        {% else %}
-            <img src="{% static 'img/user_ikon.jpg' %}" alt="アバターなし">
-        {% endif %}
-        <br><br>
-        <ul>
-            {% for log in logs %}
-                <li>
-                    <a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a>
-                    - {{ log.date }}
-                </li>
+            {% else %}
+            <img src="{% static 'images/user_ikon.jpg' %}" alt="アバターなし">
+            {% endif %}
+        </div>
+        <div class="profile_name bg-w">
+            <div class="username bg-w">
+                {{ user.username }}
+            </div>
+            <div class="bio bg-w">
+                {{ profile.bio }}
+            </div>
+        </div>
+
+        <div class="profile_btn bg-w">
+            <a href="{% url 'accounts:profile' %}" class="btn_simple">編集</a>
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn_simple bg-w">ログアウト</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="userlogs">
+        {% for log in logs %}
+        <div class="log">
+            {% if log.image %}
+            <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img src="{{ log.image.url }}"
+                        alt="投稿画像"></a></div>
+            {% else %}
+            <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img
+                        src="{% static 'images/NoImage.jpg' %}" alt="投稿画像"></a>
+                {% endif %}
+                <div class="title_user">
+                    <div class="log_title"><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></div>
+                    <div class="log_date bg-w"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">{{ log.date }}</a></div>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
-        <br><br><br><br><br>
-        <form method="post" action="{% url 'accounts:logout' %}">
-            {% csrf_token %}
-            <button type="submit">ログアウト</button>
-        </form>
+        </div>
+    </div>
     {% endblock %}
