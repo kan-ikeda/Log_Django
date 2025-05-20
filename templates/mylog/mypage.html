@@ -3,30 +3,48 @@
 {% extends 'base.html' %}
 {% load static %}
 
-    {% block title %}マイページ{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}">
+{% endblock %}
 
-    {% block content %}
-        <h1>マイページ</h1>
-        <p>ユーザー：{{ user.username }}</p>
-        <p>メールアドレス：{{ user.email }}</p>
-        <br><br>
-        {% if profile.avatar %}
+{% block title %}マイページ{% endblock %}
+
+{% block content %}
+<div class="mypage">
+    <div class="profile">
+        <div class="icon bg-w">
+            {% if profile.avatar %}
             <img src="{{ profile.avatar.url }}" alt="アバター">
-        {% else %}
+            {% else %}
             <img src="{% static 'images/user_ikon.jpg' %}" alt="アバターなし">
-        {% endif %}
-        <br><br>
+            {% endif %}
+        </div>
+        <div class="profile_name bg-w">
+            <div class="username bg-w">
+                {{ user.username }}
+            </div>
+            <div class="bio bg-w">
+                {{ profile.bio }}
+            </div>
+        </div>
+
+        <div class="profile_btn bg-w">
+            <a href="{% url 'accounts:profile' %}" class="btn_simple">編集</a>
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn_simple bg-w">ログアウト</button>
+            </form>
+        </div>
+    </div>
+    <div class="userlogs">
         <ul>
             {% for log in logs %}
-                <li>
-                    <a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a>
-                    - {{ log.date }}
-                </li>
+            <li>
+                <a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a>
+                - {{ log.date }}
+            </li>
             {% endfor %}
         </ul>
-        <br><br><br><br><br>
-        <form method="post" action="{% url 'accounts:logout' %}">
-            {% csrf_token %}
-            <button type="submit">ログアウト</button>
-        </form>
-    {% endblock %}
+    </div>
+</div>
+{% endblock %}
