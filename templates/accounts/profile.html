@@ -10,26 +10,31 @@
 {% block content %}
 
 <div class="profile">
-    <h2>プロフィール</h2>
+    <h2>{{ user.username}} のプロフィール</h2>
     <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>{{ profile_form.bio }}</p>
-    <div class="form-group">
-        <div class="user_icon">
-            <!-- プレビュー用の画像 -->
-            {% if user.is_authenticated and user.profile.avatar %}
-                <img src="{{ user.profile.avatar.url }}" id="imagePreview" alt="アイコン">
-            {% else %}
-                <img src="{% static 'images/user_ikon.jpg' %}" id="imagePreview" alt="デフォルトアイコン">
-            {% endif %}
+        {% csrf_token %}
+        <div class="edit">
+            <div class="form-group">
+                <div class="user_icon_profile">
+                    <!-- プレビュー用の画像 -->
+                    {% if user.is_authenticated and user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" id="imagePreview" alt="アイコン">
+                    {% else %}
+                    <img src="{% static 'images/user_ikon.jpg' %}" id="imagePreview" alt="デフォルトアイコン">
+                    {% endif %}
+                </div>
+
+                <!-- ファイル入力部分 -->
+                {{ profile_form.avatar }}
+                <input type="file" id="imageInput" style="display: none;">
+            </div>
+            <div class="profile_bio">
+                <p>自己紹介</p>
+                {{ profile_form.bio }}
+            </div>
         </div>
-        
-        <!-- ファイル入力部分 -->
-        {{ profile_form.avatar }}
-        <input type="file" id="imageInput" style="display: none;">
-    </div>
-    <button type="submit">保存</button>
-</form>
+        <button type="submit" class="btn">保存</button>
+    </form>
 </div>
 
 

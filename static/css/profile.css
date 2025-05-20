@@ -8,10 +8,11 @@
     box-sizing: border-box;
     margin: 5px;
     text-align: left;
+    height: 100px;
 }
 
 .profile {
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -20,6 +21,7 @@
     margin-bottom: 20px;
     padding: 5px;
     border-radius: 3px;
+
 }
 
 .image_input::-webkit-file-upload-button {
@@ -29,4 +31,37 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.user_icon_profile img{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.profile_bio{
+    margin: 0 auto;
+    width: 70%;
+
+}
+
+.profile_bio p{
+    font-size: 20px;
+    margin: 50px 0 0 5px;
+    text-align: left;
+    
+
+}
+
+.btn{
+    margin: 20px 0 0 0;
+}
+
+.form-group{
+    margin: 20px 0 0 0;
+}
+
+.edit{
+    display: flex;
+
 }
