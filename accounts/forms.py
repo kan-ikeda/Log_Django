@@ -51,7 +51,11 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'birth_date', 'avatar')
+        fields = ('bio', 'avatar')
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-input'}),
+            'avatar': forms.FileInput(attrs={'class': 'image_input'}),
+        }
 
 
 class CustomAuthenticationForm(AuthenticationForm):

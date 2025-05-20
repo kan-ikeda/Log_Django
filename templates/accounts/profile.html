@@ -1,18 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
 
 {% block title %}プロフィール{% endblock %}
 
 {% block content %}
-<h2>プロフィール</h2>
-<p>ユーザー名: {{ user.username }}</p>
-<p>メールアドレス: {{ user.email }}</p>
 
-<h3>プロフィール編集</h3>
-<form method="post" enctype="multipart/form-data">
+<div class="profile">
+    <h2>プロフィール</h2>
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>bio：{{ profile_form.bio }}</p>
-    <p>誕生日：{{ profile_form.birth_date }}</p>
-    <p>アバター:{{ profile_form.avatar }}</p>
+    <p>{{ profile_form.bio }}</p>
+    <div class="form-group">
+        <div class="user_icon">
+            <!-- プレビュー用の画像 -->
+            {% if user.is_authenticated and user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" id="imagePreview" alt="アイコン">
+            {% else %}
+                <img src="{% static 'images/user_ikon.jpg' %}" id="imagePreview" alt="デフォルトアイコン">
+            {% endif %}
+        </div>
+        
+        <!-- ファイル入力部分 -->
+        {{ profile_form.avatar }}
+        <input type="file" id="imageInput" style="display: none;">
+    </div>
     <button type="submit">保存</button>
 </form>
+</div>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Djangoフォームフィールドのファイル選択を取得
+        const imageInput = document.querySelector('input[name="avatar"]');  // Djangoフォームで作成されたファイル選択を取得
+        const imagePreview = document.getElementById('imagePreview');  // プレビュー画像
+        const defaultImageSrc = "{% static 'images/user_ikon.jpg' %}";  // デフォルト画像
+
+        // ファイル選択時に画像プレビュー更新
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.addEventListener('load', function () {
+                    imagePreview.src = reader.result;  // 選択された画像をプレビューに表示
+                    imagePreview.style.display = 'block';
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                // ファイルが選択されていない場合、デフォルト画像を表示
+                imagePreview.src = defaultImageSrc;
+            }
+        });
+    });
+</script>
+
+
 {% endblock %}
