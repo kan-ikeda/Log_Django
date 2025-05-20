@@ -21,6 +21,7 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form': form})
 
 class CustomLoginView(LoginView):
+    template_name = 'login.html'
     authentication_form = CustomAuthenticationForm
 
 

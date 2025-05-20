@@ -1,21 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/log_detail.css' %}">
+{% endblock %}
+
+{% block title %}
+    詳細
+{% endblock %}
+
+
 {% block content %}
+<div class="body">
+    <div class="detail">
+        <div class="title bg-w"><h2 class="bg-w">{{ log.title }}</h2></div>
+        <div class="log_img bg-w">
+            {% if log.image %}
+                <img src="{{ log.image.url }}" alt="投稿画像" class="bg-w">
+            {% else %}
+                <img src="{% static 'img/NoImage.jpg' %}" alt="画像なし" class="bg-w">
+            {% endif %}
+        </div>
+        <div class="word bg-w">
+            <div class="author bg-w">@{{ log.author.username }}</div>
+            <div class="date bg-w">{{ log.date }}</div>
+        </div>
+        <div class="content bg-w">{{ log.content }}</div>
 
+    </div>
+</div>
 
-<h1>日記詳細</h1>
-<p>タイトル：</p>
-{{ log.title }}
-<p>日付：</p>
-{{ log.date }}
-<p>作者: {{ log.author.username }}</p>
-<p>内容：</p>
-{{ log.content }}
-{% if log.image %}
-    <img src="{{ log.image.url }}" alt="投稿画像" style="max-width:300px; max-height:300px;">
-{% else %}
-    <img src="{% static 'img/NoImage.jpg' %}" alt="画像なし" style="max-width:300px; max-height:300px;">
-{% endif %}
 
 
 {% endblock %}
