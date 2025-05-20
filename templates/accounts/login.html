@@ -12,8 +12,30 @@
     <h2>ログイン</h2>
     <form method="post">
         {% csrf_token %}
-        <div class="username">{{ form.username }}</div>
-        <div class="password">{{ form.password }}</div>
+        
+        <div class="username">
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="error">
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="password">
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="error">
+                    {{ form.password.errors }}
+                </div>
+            {% endif %}
+        </div>
+        {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         <button type="submit" class="btn">ログイン</button>
     </form>
     <p>アカウントをお持ちでないですか？ <a href="{% url 'accounts:signup' %}">新規登録</a></p>
