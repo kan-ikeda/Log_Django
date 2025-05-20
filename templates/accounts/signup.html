@@ -1,24 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block title %}新規登録{% endblock %}
 
 {% block content %}
-<h2>新規登録</h2>
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="form-group">
-        {{ field.label_tag }}
-        {{ field }}
-        {% if field.help_text %}
-        <small>{{ field.help_text }}</small>
+
+<div class="signup">
+    <h2>新規登録</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <ul class="error_list">
+            {% for error in form.non_field_errors %}
+            <li class="error">{{ error }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
-        {% for error in field.errors %}
-        <p class="error">{{ error }}</p>
-        {% endfor %}
-    </div>
-    {% endfor %}
-    <button type="submit">登録</button>
-</form>
-<p>すでにアカウントをお持ちですか？ <a href="{% url 'accounts:login' %}">ログイン</a></p>
+        <div class="username space">
+            {{ form.username }}
+            {% if form.username.errors %}
+            <ul class="error_list">
+                {% for error in form.username.errors %}
+                <li class="error">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="help_text"><small>{{ form.username.help_text }}</small></div>
+        </div>
+        <div class="email space">
+            {{ form.email }}
+            {% if form.email.errors %}
+            <ul class="error_list">
+                {% for error in form.email.errors %}
+                <li class="error">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div class="help_text"><small>{{ form.email.help_text }}</small></div>
+        </div>
+        <div class="space">
+            <div class="password1">
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <ul class="error_list">
+                    {% for error in form.password1.errors %}
+                    <li class="error">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="password2">
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <ul class="error-list">
+                    {% for error in form.password2.errors %}
+                    <li class="error">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="help_text"><small>{{ form.password1.help_text }}</small></div>
+            </div>
+        </div>
+        <button type="submit" class="btn">新規登録</button>
+    </form>
+
+    <p>すでにアカウントをお持ちですか？ <a href="{% url 'accounts:login' %}">ログイン</a></p>
+</div>
+
+
 {% endblock %}

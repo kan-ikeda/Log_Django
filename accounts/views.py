@@ -2,7 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, ProfileForm
+from django.contrib.auth.views import LoginView
+from .forms import SignUpForm, ProfileForm, CustomAuthenticationForm
 
 def signup(request):
     if request.method == 'POST':
@@ -18,6 +19,11 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm
+
+
 
 @login_required
 def home(request):
