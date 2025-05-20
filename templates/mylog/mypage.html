@@ -5,6 +5,8 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/log_list.css' %}">
+
 {% endblock %}
 
 {% block title %}マイページ{% endblock %}
@@ -36,15 +38,26 @@
             </form>
         </div>
     </div>
+
+
+
+
     <div class="userlogs">
-        <ul>
-            {% for log in logs %}
-            <li>
-                <a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a>
-                - {{ log.date }}
-            </li>
+        {% for log in logs %}
+        <div class="log">
+            {% if log.image %}
+            <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img src="{{ log.image.url }}"
+                        alt="投稿画像"></a></div>
+            {% else %}
+            <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img
+                        src="{% static 'images/NoImage.jpg' %}" alt="投稿画像"></a>
+                {% endif %}
+                <div class="title_user">
+                    <div class="log_title"><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></div>
+                    <div class="log_date bg-w"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">{{ log.date }}</a></div>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
