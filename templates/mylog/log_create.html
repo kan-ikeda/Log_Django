@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/log_create.css' %}">
+{% endblock %}
+
 {% block content %}
 
 
-<h1>日記作成</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>タイトル：</p>
@@ -13,7 +17,7 @@
     <input type="file" name="image" id="imageInput">
     <img id="imagePreview" src="#" alt="プレビュー"> <br>
     {{ form.tags }}
-    <button type="submit">作成</button>
+    <button type="submit" class="btn">投稿</button>
 </form>
 
 
@@ -21,7 +25,10 @@
 <script>
     const imageInput = document.getElementById('imageInput');
     const imagePreview = document.getElementById('imagePreview');
-    const noImageSrc = "{% static 'img/NoImage.jpg' %}";
+    const noImageSrc = "{% static 'images/NoImage.jpg' %}";
+
+    imagePreview.src = noImageSrc;
+    imagePreview.style.display = 'block';
 
     imageInput.addEventListener('change', function() {
         const file = this.files[0];
@@ -41,7 +48,7 @@
         }
     });
 
-    imagePreview.style.display = 'none';
+    
 </script>
 
 {% endblock %}
