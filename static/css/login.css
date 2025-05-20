@@ -9,7 +9,7 @@
     font-size: 30px;
 }
 
-a {
+.login a {
     border-bottom: 1px solid #3498DB;
     padding-bottom: 0.01rem;
     color: #3498DB; 
