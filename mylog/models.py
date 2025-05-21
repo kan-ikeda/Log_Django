@@ -21,6 +21,7 @@ class Log(models.Model):
     content = models.TextField('内容', blank=True, null=True)
     tags = models.ManyToManyField(Tag, related_name='タグ')
     datetime = models.DateTimeField(auto_now_add=True)
+    is_public = models.BooleanField(default=True)
 
     def truncated_title9(self, length=9):
         if len(self.title) > length:
