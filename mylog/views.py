@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView
 from .models import Log
 from .form import LogForm
 from django.urls import reverse_lazy
@@ -51,3 +51,14 @@ class LogDetailView(DetailView):
     model = Log
     template_name = 'mylog/log_detail.html'
     context_object_name = 'log'
+
+
+# 日記削除
+class LogDeleteView(LoginRequiredMixin, DeleteView):
+    model = Log
+    template_name = 'mylog/delete_confirm.html'
+    success_url = reverse_lazy('mylog:mypage')  # 削除後にマイページへリダイレクト
+    context_object_name = 'log'
+
+    def get_queryset(self):
+        return Log.objects.filter(author=self.request.user)  # 自身の投稿のみ削除可能
