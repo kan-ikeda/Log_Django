@@ -3,7 +3,6 @@
 
 {% block extra_css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/log_create.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,11 +11,20 @@
     <form method="post" enctype="multipart/form-data">
         <div class="log_create">
             {% csrf_token %}
-            <img id="imagePreview" src="#" alt="プレビュー">
-            <input type="file" name="image" id="imageInput">
-            {{ form.title }}
-            {{ form.content }}
-            <div>{{ form.tags }}</div>
+            <div class="log_create_edit">
+                <div class="log_img">
+                    <img id="imagePreview" src="#" alt="プレビュー">
+                    <input type="file" name="image" id="imageInput">
+                </div>
+                <div class="log_create_titlecontent">
+                    {{ form.title }}
+                    <div class="content">
+                        {{ form.content }}
+                        <div class="tags">{{ form.tags }}</div>
+                    </div>
+                </div>
+            </div>
+            
             <button type="submit" class="btn">投稿</button>
         </div>
     </form>
