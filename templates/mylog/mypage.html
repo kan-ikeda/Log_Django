@@ -31,7 +31,7 @@
         </div>
 
         <div class="profile_btn bg-w">
-            <a href="{% url 'accounts:profile' %}" class="btn_simple">編集</a>
+            <a href="{% url 'accounts:profile' %}" class="btn_simple">プロフィール編集</a>
             <form method="post" action="{% url 'accounts:logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="btn_simple bg-w">ログアウト</button>
