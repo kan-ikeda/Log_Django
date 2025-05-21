@@ -13,8 +13,8 @@
 <div class="body">
     {% for log in logs %}
     <div class="logs">
-        <div class="logs_area">
-            <div class="log">
+        <div class="logs_area bg-w">
+            <div class="log bg-w">
                 {% if log.image %}
                     <div class="log_img">
                         <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
@@ -22,19 +22,19 @@
                         </a>
                     </div>
                 {% else %}
-                    <div class="log_img">
+                    <div class="log_img bg-w">
                         <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
                             <img src="{% static 'images/NoImage.jpg' %}" alt="投稿画像">
                         </a>
                     </div>
                 {% endif %}
-                <div class="title_user">
-                    <div class="log_title">
+                <div class="title_user bg-w">
+                    <div class="log_title bg-w">
                         <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
                             {{ log.truncated_title11 }}
                         </a>
                     </div>
-                    <div class="log_user">
+                    <div class="log_user bg-w">
                         <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
                             @{{ log.author}}
                         </a>
