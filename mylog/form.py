@@ -5,7 +5,7 @@ from .models import Log
 class LogForm(forms.ModelForm):
     class Meta:
         model = Log
-        fields = ('title', 'content', 'image', 'tags')
+        fields = ('title', 'content', 'image', 'tags', 'is_public')
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-title form_input',
@@ -29,5 +29,8 @@ class LogForm(forms.ModelForm):
             }),
             'tags': forms.SelectMultiple(attrs={
                 'class': 'form-tags',
+            }),
+            'is_public': forms.CheckboxInput(attrs={
+                'class': 'switch-input',
             }),
         }
