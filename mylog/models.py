@@ -20,6 +20,7 @@ class Log(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
     content = models.TextField('内容', blank=True, null=True)
     tags = models.ManyToManyField(Tag, related_name='タグ')
+    datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

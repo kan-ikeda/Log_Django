@@ -15,7 +15,7 @@ class LogListView(ListView):
     model = Log
     template_name = 'mylog/log_list.html'
     context_object_name = 'logs'
-    ordering = ['-date']
+    ordering = ['-datetime']
 
 
 # マイページ
@@ -25,7 +25,7 @@ class MyPageView(LoginRequiredMixin, ListView):
     context_object_name = 'logs'
 
     def get_queryset(self):
-        return Log.objects.filter(author=self.request.user).order_by('-date')
+        return Log.objects.filter(author=self.request.user).order_by('-datetime')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
