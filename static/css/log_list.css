@@ -1,23 +1,26 @@
 .body{
     width: 70%;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .title{
     font-size: 25px;
 }
 
-.logs{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
 
+.logs{
+    display: flex;
+    background-color: #fff;
 }
 
+
+
 .log{
-    width: 300px;
+    width: 100%;
     height: auto;
-    padding: 20px;
     background-color: #fff;
 }
 
@@ -27,13 +30,11 @@
     background-color: #fff;
 }
 
-.log_title a{
-    background-color: #fff;
+
+.logs_area{
+    margin: 20px;
 }
 
-.log_user{
-    background-color: #fff;
-}
 
 
 
