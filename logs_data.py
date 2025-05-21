@@ -15,7 +15,7 @@ logs_data = [
     {
         'title': '初めての日記',
         'date': date(2024, 1, 1),
-        'author': testuser,  # ユーザーオブジェクトを直接指定
+        'author': 'testuser', 
         'content': '今日から日記を始めます。',
         'tags': ['旅行'],  # タグ名を指定
         'image':'logs/data_image3.jpg',
@@ -23,7 +23,7 @@ logs_data = [
     {
         'title': '旅行の思い出',
         'date': date(2023, 12, 25),
-        'author': testuser,  # ユーザーオブジェクトを直接指定
+        'author': 'testuser',  # ユーザーオブジェクトを直接指定
         'content': 'きれいな景色だね～',
         'tags': ['旅行'],  # タグ名を指定
         'image':'logs/data_image1.jpg',
@@ -31,14 +31,38 @@ logs_data = [
     {
         'title': '今日のランチ',
         'date': date(2024, 1, 2),
-        'author': testuser,  # ユーザーオブジェクトを直接指定
+        'author': 'testuser',  # ユーザー名を指定
         'content': '美味しいラーメンを食べました。',
         'tags': ['グルメ'],  # タグ名を指定
         'image':'logs/data_image2.jpg',
     },
+    {
+        'title': '初めての京都旅行',
+        'date': date(2025, 4, 20),
+        'author': testuser,
+        'content': '京都に行ってきました！清水寺は圧巻。抹茶スイーツも堪能しました。',
+        'tags': ['旅行'],
+        'image': 'logs/data_image4.jpg',
+    },
+    {
+        'title': '沖縄の海',
+        'date': date(2024, 8, 17),
+        'author': testuser,
+        'content': '沖縄の海は本当に綺麗だった。シュノーケリングで熱帯魚も見れた！',
+        'tags': ['旅行'],
+        'image': 'logs/data_image5.jpg', 
+    },
 ]
 
 for log_data in logs_data:
+    # ユーザーを取得
+    try:
+        user = User.objects.get(username=log_data['author'])
+    except User.DoesNotExist:
+        print(f"Error: User '{log_data['author']}' does not exist.")
+        continue
+
+
     # タグを取得
     tags = []
     for tag_name in log_data['tags']:
@@ -53,7 +77,7 @@ for log_data in logs_data:
     log = Log.objects.create(
         title=log_data['title'],
         date=log_data['date'],
-        author=log_data['author'],
+        author=user,
         content=log_data['content'],
         image=log_data['image'],
     )
