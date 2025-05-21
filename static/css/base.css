@@ -76,3 +76,18 @@ li {
 .bg-w{
     background-color: #fff;
 }
+
+
+footer{
+    padding: 50px 0;
+    margin: 30px 0 0 0;
+}
+
+footer p{
+    font-size: 12px;
+    color: #495057;
+}
+
+.bodybody{
+    min-height: 100vh;
+}
