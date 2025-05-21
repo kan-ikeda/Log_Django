@@ -7,4 +7,5 @@ urlpatterns = [
     path('create/', views.LogCreateView.as_view(), name='log_create'), #日記作成
     path('<int:pk>/', views.LogDetailView.as_view(), name='log_detail'), # 日記詳細
     path('mypage/', views.MyPageView.as_view(),name= 'mypage'), #マイページ
+    path('delete/<int:pk>', views.LogDeleteView.as_view(), name='delete_log'),#日記削除
 ]
