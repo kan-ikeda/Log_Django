@@ -1,13 +1,16 @@
-# Log_Django
-Djangoを用いた日記アプリ
+# Djangoを用いた日記アプリ
 
 ## 開発環境
-- Windows
-- Django
-- PostgreSQL?
+- フレームワーク
+    - Django
+- データベース
+    - SQLite
+- ツール
+    - Git、GitHub　：　バージョン管理
+    - Notion　：　タスク管理
+
+
 
 ## ローカルでの動作の手順
 
 ## 大変だったこと
-
-## 参考資料
