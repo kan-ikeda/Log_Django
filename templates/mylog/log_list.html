@@ -2,29 +2,47 @@
 {% load static %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/log_list.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/log_list.css' %}">
 {% endblock %}
 
 {% block title %}
-    日記一覧
+日記一覧
 {% endblock %}
 
 {% block content %}
-    <div class="body">
-        <div class="logs">
-            {% for log in logs %}
-                <div class="log">
-                    {% if log.image %}
-                        <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img src="{{ log.image.url }}" alt="投稿画像"></a></div>
-                    {% else %}
-                        <div class="log_img"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w"><img src="{% static 'images/NoImage.jpg' %}" alt="投稿画像"></a>
-                    {% endif %}
-                    <div class="title_user">
-                        <div class="log_title"><a href="{% url 'mylog:log_detail' log.pk %}">{{ log.title }}</a></div>
-                        <div class="log_user"><a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">@{{ log.author }}</a></div>
+<div class="body">
+    {% for log in logs %}
+    <div class="logs">
+        <div class="logs_area">
+            <div class="log">
+                {% if log.image %}
+                    <div class="log_img">
+                        <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
+                            <img src="{{ log.image.url }}" alt="投稿画像">
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="log_img">
+                        <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
+                            <img src="{% static 'images/NoImage.jpg' %}" alt="投稿画像">
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="title_user">
+                    <div class="log_title">
+                        <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
+                            {{ log.title }}
+                        </a>
+                    </div>
+                    <div class="log_user">
+                        <a href="{% url 'mylog:log_detail' log.pk %}" class="bg-w">
+                            @{{ log.author}}
+                        </a>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}
