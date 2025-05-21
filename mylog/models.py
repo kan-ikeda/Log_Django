@@ -22,5 +22,15 @@ class Log(models.Model):
     tags = models.ManyToManyField(Tag, related_name='タグ')
     datetime = models.DateTimeField(auto_now_add=True)
 
+    def truncated_title9(self, length=9):
+        if len(self.title) > length:
+            return self.title[:length] + "…"
+        return self.title
+    
+    def truncated_title11(self, length=11):
+        if len(self.title) > length:
+            return self.title[:length] + "…"
+        return self.title
+
     def __str__(self):
         return self.title
