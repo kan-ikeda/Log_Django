@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView, DeleteView
-from .models import Log
-from .form import LogForm
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, View
+from .models import Log, Comment, Like
+from .form import LogForm, CommentForm
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.models import Profile
+from django.http import HttpResponseRedirect
 
 
 
@@ -52,6 +53,14 @@ class LogDetailView(DetailView):
     template_name = 'mylog/log_detail.html'
     context_object_name = 'log'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        log = self.get_object()
+        context['comments'] = log.comments.order_by('-created_at')  # コメントを新しい順に取得
+        context['comment_form'] = CommentForm()  # コメントフォーム
+        context['like_count'] = log.likes.count()  # いいねの数を取得
+        return context
+
 
 # 日記削除
 class LogDeleteView(LoginRequiredMixin, DeleteView):
@@ -62,3 +71,31 @@ class LogDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Log.objects.filter(author=self.request.user)  # 自身の投稿のみ削除可能
+
+
+# コメント投稿
+class AddCommentView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'mylog/add_comment.html'  # 必要に応じてテンプレートを作成
+    # 投稿完了後、詳細ページへリダイレクト
+    def get_success_url(self):
+        return reverse_lazy('mylog:log_detail', kwargs={'pk': self.kwargs['log_id']})
+
+    def form_valid(self, form):
+        log_pk = self.kwargs['log_id']
+        log = get_object_or_404(Log, pk=log_pk)
+        comment = form.save(commit=False)
+        comment.log = log
+        comment.user = self.request.user
+        comment.save()
+        return super().form_valid(form)
+
+#いいね機能
+class LikeView(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        log = get_object_or_404(Log, pk=pk)
+        like, created = Like.objects.get_or_create(log=log, user=request.user)
+        if not created:
+            like.delete()
+        return HttpResponseRedirect(reverse('mylog:log_detail', args=[pk]))

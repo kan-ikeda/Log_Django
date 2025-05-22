@@ -1,5 +1,5 @@
 from django import forms
-from .models import Log
+from .models import Log, Comment
 
 #日記作成用フォーム
 class LogForm(forms.ModelForm):
@@ -32,5 +32,18 @@ class LogForm(forms.ModelForm):
             }),
             'is_public': forms.CheckboxInput(attrs={
                 'class': 'switch-input',
+            }),
+        }
+
+# コメント投稿用フォーム
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+        widgets = {
+            'content': forms.TextInput(attrs={
+                'class': 'comment_content form_input',
+                'rows': 3,
+                'placeholder': 'コメントを追加',
             }),
         }

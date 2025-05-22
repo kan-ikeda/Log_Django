@@ -35,3 +35,23 @@ class Log(models.Model):
 
     def __str__(self):
         return self.title
+
+# コメントモデル
+class Comment(models.Model):
+    log = models.ForeignKey(Log, on_delete=models.CASCADE, verbose_name='日記', related_name='comments')  # 紐付ける日記
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='投稿者')  # コメントしたユーザー
+    content = models.TextField('コメント内容')
+    created_at = models.DateTimeField('投稿日時', auto_now_add=True)
+
+    def __str__(self):
+        return self.content[:20]  
+
+# いいねモデル
+class Like(models.Model):
+    log = models.ForeignKey(Log, on_delete=models.CASCADE, verbose_name='日記', related_name='likes')  # 紐付ける日記
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='ユーザー')  # いいねしたユーザー
+    created_at = models.DateTimeField('いいね日時', auto_now_add=True)
+
+    class Meta:
+        # ユーザーが同じ投稿に複数回いいねできないようにする
+        unique_together = ('log', 'user')

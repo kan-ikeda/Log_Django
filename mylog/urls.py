@@ -8,4 +8,6 @@ urlpatterns = [
     path('<int:pk>/', views.LogDetailView.as_view(), name='log_detail'), # 日記詳細
     path('mypage/', views.MyPageView.as_view(),name= 'mypage'), #マイページ
     path('delete/<int:pk>', views.LogDeleteView.as_view(), name='delete_log'),#日記削除
+    path('comment/<int:log_id>/', views.AddCommentView.as_view(), name='add_comment'),
+    path('like/<int:pk>/', views.LikeView.as_view(), name='like'),
 ]

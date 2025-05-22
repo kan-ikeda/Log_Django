@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load mylog_tags %}
 
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/log_detail.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/log_detail.css' %}">
 {% endblock %}
 
 {% block title %}
-    詳細
+詳細
 {% endblock %}
 
 
@@ -17,21 +18,23 @@
         <div class="author bg-w">
             <div class="author_icon bg-w">
                 {% if log.author.profile.avatar %}
-                    <img src="{{ log.author.profile.avatar.url }}" alt="ユーザーアイコン">
+                <img src="{{ log.author.profile.avatar.url }}" alt="ユーザーアイコン">
                 {% else %}
-                    <img src="{% static 'images/user_ikon.png' %}" alt="デフォルトユーザーアイコン">
+                <img src="{% static 'images/user_icon.jpg' %}" alt="デフォルトユーザーアイコン">
                 {% endif %}
             </div>
             <div class="user_name bg-w">
                 @{{ log.author.username }}
             </div>
         </div>
-        <div class="title bg-w"><h2 class="bg-w">{{ log.title }}</h2></div>
+        <div class="title bg-w">
+            <h2 class="bg-w">{{ log.title }}</h2>
+        </div>
         <div class="log_img bg-w">
             {% if log.image %}
-                <img src="{{ log.image.url }}" alt="投稿画像" class="bg-w">
+            <img src="{{ log.image.url }}" alt="投稿画像" class="bg-w">
             {% else %}
-                <img src="{% static 'images/NoImage.jpg' %}" alt="画像なし" class="bg-w">
+            <img src="{% static 'images/NoImage.jpg' %}" alt="画像なし" class="bg-w">
             {% endif %}
         </div>
         <div class="word bg-w">
@@ -39,6 +42,48 @@
         </div>
         <div class="content bg-w">{{ log.content }}</div>
 
+
+        <div class="like-section bg-w">
+            <div class="like-container bg-w">
+                <p class="bg-w">
+                <form method="post" action="{% url 'mylog:like' log.pk %}" class="bg-w">
+                    {% csrf_token %}
+                    <button type="submit" class="like-button bg-w">
+                        {% if user.is_authenticated and log|has_liked:user %}
+                        <span class="bg-w">♥</span> {{ like_count }}
+                        {% else %}
+                        <span class="bg-w">♡</span> {{ like_count }}
+                        {% endif %}
+                    </button>
+                </form>
+                </p>
+            </div>
+        </div>
+
+        <div class="comments-section bg-w">
+            {% for comment in comments %}
+            <div class="comment bg-w">
+                <div class="comment-author bg-w">
+                    {% if comment.user.profile.avatar %}
+                    <img src="{{ comment.user.profile.avatar.url }}" alt="コメントユーザーアイコン" class="comment-user-icon bg-w">
+                    {% else %}
+                    <img src="{% static 'images/user_icon.jpg' %}" alt="デフォルトコメントユーザーアイコン"
+                        class="comment-user-icon bg-w">
+                    {% endif %}
+                    <strong class="bg-w comment-username">@{{ comment.user.username }}</strong>
+                </div>
+                <p class="bg-w">{{ comment.content }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="add-comment-section bg-w">
+            <form method="post" action="{% url 'mylog:add_comment' log.pk %}" class="bg-w">
+                {% csrf_token %}
+                {{comment_form.content}}
+                <button type="submit" class="bg-w">➡</button>
+            </form>
+        </div>
     </div>
 </div>
 
