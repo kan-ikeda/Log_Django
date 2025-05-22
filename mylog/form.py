@@ -41,8 +41,8 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('content',)
         widgets = {
-            'content': forms.Textarea(attrs={
-                'class': 'form-content form_input',
+            'content': forms.TextInput(attrs={
+                'class': 'comment_content form_input',
                 'rows': 3,
                 'placeholder': 'コメントを追加',
             }),
