@@ -14,6 +14,18 @@
 {% block content %}
 <div class="body">
     <div class="detail">
+        <div class="author bg-w">
+            <div class="author_icon bg-w">
+                {% if log.author.profile.avatar %}
+                    <img src="{{ log.author.profile.avatar.url }}" alt="ユーザーアイコン">
+                {% else %}
+                    <img src="{% static 'images/user_ikon.png' %}" alt="デフォルトユーザーアイコン">
+                {% endif %}
+            </div>
+            <div class="user_name bg-w">
+                @{{ log.author.username }}
+            </div>
+        </div>
         <div class="title bg-w"><h2 class="bg-w">{{ log.title }}</h2></div>
         <div class="log_img bg-w">
             {% if log.image %}
@@ -23,7 +35,6 @@
             {% endif %}
         </div>
         <div class="word bg-w">
-            <div class="author bg-w">@{{ log.author.username }}</div>
             <div class="date bg-w">{{ log.date }}</div>
         </div>
         <div class="content bg-w">{{ log.content }}</div>
