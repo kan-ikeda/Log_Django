@@ -30,17 +30,28 @@
     background-color: #fff;
 }
 
-
 .logs_area{
     margin: 20px;
 }
-
-
-
-
 
 .log_img img{
     width: 100%;
     height: auto;
 }
 
+
+
+.user_id_icon{
+    display: flex;
+    align-items: center;
+    margin: 0 0 5px 0;
+}
+
+.user_name{
+    margin: 0 0 0 10px;
+    font-size: 18px;
+}
+
+.user_icon img {
+        display: block; 
+    }
