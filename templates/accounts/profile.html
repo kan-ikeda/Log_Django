@@ -20,7 +20,7 @@
                     {% if user.is_authenticated and user.profile.avatar %}
                     <img src="{{ user.profile.avatar.url }}" id="imagePreview" alt="アイコン">
                     {% else %}
-                    <img src="{% static 'images/user_ikon.jpg' %}" id="imagePreview" alt="デフォルトアイコン">
+                    <img src="{% static 'images/user_icon.jpg' %}" id="imagePreview" alt="デフォルトアイコン">
                     {% endif %}
                 </div>
 
