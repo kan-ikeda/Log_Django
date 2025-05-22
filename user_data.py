@@ -4,9 +4,16 @@ from django.contrib.auth.hashers import make_password
 
 users_data = [
     {
-        'username': 'testuser',
-        'password': 'testpassword',  # 安全なパスワードに変更してください
+        'username': 'CapyCapy',
+        'password': 'unext2025',
         'email': 'test@example.com',
+        'is_staff': False,
+        'is_superuser': False,
+    },
+    {
+        'username': 'Wallaby',
+        'password': 'unext2025',
+        'email': 'test2@example.com',
         'is_staff': False,
         'is_superuser': False,
     },
