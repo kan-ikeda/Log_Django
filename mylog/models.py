@@ -44,7 +44,7 @@ class Comment(models.Model):
     created_at = models.DateTimeField('投稿日時', auto_now_add=True)
 
     def __str__(self):
-        return self.content[:20]  # コメント内容の先頭20文字を表示
+        return self.content[:20]  
 
 # いいねモデル
 class Like(models.Model):
